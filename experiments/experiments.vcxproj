@@ -73,6 +73,7 @@
     <ClInclude Include="enum_data_manager.h" />
     <ClInclude Include="enum_stuff.h" />
     <ClInclude Include="dataholder.h" />
+    <ClInclude Include="grid.h" />
     <ClInclude Include="integer_id.h" />
     <ClInclude Include="parse_id.h" />
     <ClInclude Include="datapoolvalue.h" />

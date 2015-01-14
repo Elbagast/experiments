@@ -4,20 +4,26 @@
 #include "enum_data_manager.h"
 #include "datapoolvalue.h"
 
+#include "grid.h"
+
 template <char C>
 struct Foo
 {
     char m_char{ C };
 };
 
-
-class 2DCoord
-{};
+class Bar
+{
+public:
+    explicit Bar(int b) :
+        a{ b }
+    {}
+private:
+    int a;
+};
 
 int main(int argc, char* argv[])
 {
-    2DCoord i;
-
     //DEBUG_TestID();
 
     Foo<'A'> a;
@@ -86,6 +92,10 @@ int main(int argc, char* argv[])
 
     std::cout << (thing == dps2) << std::endl;
     std::cout << (dps1 == thing) << std::endl;
+
+    Grid<int, 3, 3> g;
+    g.at(1,1) = 5;
+    std::cout << g.at(4) << std::endl;
 
     return 0;
 }
