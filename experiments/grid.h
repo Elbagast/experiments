@@ -29,7 +29,7 @@ private:
 
 /*
 
-Grid<5,3,T> stores:
+Grid<T,5,3> stores:
 
 T T T T T
 T T T T T
@@ -55,6 +55,7 @@ public:
     //============================================================
     using value_type = T;
     using index_type = std::size_t;
+    using coord_type = GridCoordinate;
     using array_type = std::array < value_type, Width*Height >;
     //using iterator = typename array_type::iterator;
     //using const_iterator = typename array_type::const_iterator;
@@ -84,27 +85,29 @@ public:
     // Index and Coordinate conversions
     index_type indexToWidth(index_type index) const                         { return index % Width; }
     index_type indexToHeight(index_type index) const                        { return index / Height; }
-    GridCoordinate indexToCoordinate(index_type index) const                { return GridCoordinate(indexToWidth(index), indexToHeight(index)); }
+    coord_type indexToCoordinate(index_type index) const                    { return coord_type(indexToWidth(index), indexToHeight(index)); }
     index_type coordinateToIndex(index_type width, index_type height) const { return width + height * Height; }
     index_type coordinateToIndex(GridCoordinate coord) const                { return coordinateToIndex(coord.getWidth(), coord.getHeight()); }
 
-    value_type& at(index_type index)                                 { return m_array.at(index); }
-    value_type& at(index_type width, index_type height)              { return m_array.at(coordinateToIndex(width, height)); }
-    value_type& at(GridCoordinate coord)                             { return m_array.at(coordinateToIndex(coord)); }
+    value_type& at(index_type index)                                { return m_array.at(index); }
+    value_type& at(index_type width, index_type height)             { return m_array.at(coordinateToIndex(width, height)); }
+    value_type& at(coord_type coord)                                { return m_array.at(coordinateToIndex(coord)); }
 
-    value_type const& at(index_type index) const                     { return m_array.at(index); }
-    value_type const& at(index_type width, index_type height) const  { return m_array.at(coordinateToIndex(width, height)); }
-    value_type const& at(GridCoordinate coord) const                 { return m_array.at(coordinateToIndex(coord)); }
+    value_type const& at(index_type index) const                    { return m_array.at(index); }
+    value_type const& at(index_type width, index_type height) const { return m_array.at(coordinateToIndex(width, height)); }
+    value_type const& at(coord_type coord) const                    { return m_array.at(coordinateToIndex(coord)); }
 
     value_type const& cat(index_type index) const                    { return m_array.at(index); }
     value_type const& cat(index_type width, index_type height) const { return m_array.at(coordinateToIndex(width, height)); }
-    value_type const& cat(GridCoordinate coord) const                { return m_array.at(coordinateToIndex(coord)); }
+    value_type const& cat(coord_type coord) const                    { return m_array.at(coordinateToIndex(coord)); }
 
     // Reveal the array
-    array_type& getArray()              { return m_array; }
-    array_type const& getArray() const  { return m_array; }
-    array_type const& cgetArray() const { return m_array; }
+    array_type& getArray()                                          { return m_array; }
+    array_type const& getArray() const                              { return m_array; }
+    array_type const& cgetArray() const                             { return m_array; }
     
+    void setArray(array_type const& inputArray)                     { m_array = inputArray; }
+    void setArray(array_type && inputArray)                         { m_array = std::move(inputArray); }
 private:
     // Helpers
     //============================================================
