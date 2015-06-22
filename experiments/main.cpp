@@ -3,8 +3,14 @@
 #include "integer_id.h"
 #include "enum_data_manager.h"
 #include "datapoolvalue.h"
-
+#include "enum_inclass.h"
 #include "grid.h"
+#include "object_manager.h"
+#include "member_templates.h"
+#include "abstract_interface_test.h"
+#include "fake_virtual_functions.h"
+#include "interface_operators.h"
+#include "data_policies.h"
 
 template <char C>
 struct Foo
@@ -22,8 +28,17 @@ private:
     int a;
 };
 
+/*
+Quick typedef test..
+*/
+template<typename T>
+using ref_ptr = T*;
+
+
 int main(int argc, char* argv[])
 {
+    test_EnumInClass();
+
     //DEBUG_TestID();
 
     Foo<'A'> a;
@@ -96,6 +111,46 @@ int main(int argc, char* argv[])
     Grid<int, 3, 3> g;
     g.at(1,1) = 5;
     std::cout << g.at(4) << std::endl;
+
+    ObjectID oid2 = ObjectID();
+    Object* p = nullptr;
+    {
+        ObjectID oid1 = Object_Manager::getInstance()->makeObject();
+
+        std::cout << oid1.get()->x << std::endl;
+        std::cout << oid1.get()->y << std::endl;
+        p = oid1.get();
+        oid2 = oid1;
+    }
+    // this value is now nonsense as p is dangling
+    std::cout << p->x << std::endl;
+    std::cout << oid2.get()->x << std::endl;
+
+    ref_ptr<int> refptrtest1 = new int;
+    ref_ptr<int const> refptrtest2 = new int;
+    ref_ptr<int> const refptrtest3 = new int;
+    ref_ptr<int const> const refptrtest4 = new int;
+
+    *refptrtest1 = 1;
+    //*refptrtest2 = 2;
+    *refptrtest3 = 3;
+    //*refptrtest4 = 4;
+
+    delete refptrtest1;
+    delete refptrtest2;
+    delete refptrtest3;
+    delete refptrtest4;
+
+
+	member_templates::test();
+
+	abstract_interface_test::test();
+
+	fake_virtual_functions::test();
+
+	interface_operators::test();
+
+	data_policies::test();
 
     return 0;
 }

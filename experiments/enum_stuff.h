@@ -72,7 +72,7 @@ struct DataTypeHolder < DataEnum::String >
 // We can now move from enum to type: DataType<DataEnum::Bool> == bool
 // What about the other way around?
 
-// 5 - constepr function to move from type to enum
+// 5 - constexpr function to move from type to enum
 // ==================================================
 template <typename T = DataType<DataEnum::Undefined> >
 struct DataEnumHolder

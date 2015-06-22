@@ -66,17 +66,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="abstract_interface_test.cpp" />
+    <ClCompile Include="data_policies.cpp" />
+    <ClCompile Include="fake_virtual_functions.cpp" />
     <ClCompile Include="integer_id.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="member_templates.cpp" />
+    <ClCompile Include="objectid.cpp" />
+    <ClCompile Include="object_manager.cpp" />
+    <ClCompile Include="interface_operators.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="abstract_interface_test.h" />
+    <ClInclude Include="data_policies.h" />
     <ClInclude Include="enum_data_manager.h" />
+    <ClInclude Include="enum_inclass.h" />
+    <ClInclude Include="enum_string.h" />
     <ClInclude Include="enum_stuff.h" />
-    <ClInclude Include="dataholder.h" />
+    <ClInclude Include="fake_virtual_functions.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="id_and_index_test.h" />
     <ClInclude Include="integer_id.h" />
+    <ClInclude Include="interface_operators.h" />
+    <ClInclude Include="member_templates.h" />
+    <ClInclude Include="objectid.h" />
+    <ClInclude Include="object_manager.h" />
     <ClInclude Include="parse_id.h" />
     <ClInclude Include="datapoolvalue.h" />
+    <ClInclude Include="ref_ptr.h" />
+    <ClInclude Include="templated_using_declarations.h" />
     <ClInclude Include="uniquename.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

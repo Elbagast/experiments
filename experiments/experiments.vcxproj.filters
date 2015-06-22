@@ -24,6 +24,27 @@
     <ClCompile Include="integer_id.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objectid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="object_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="member_templates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="abstract_interface_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fake_virtual_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interface_operators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data_policies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="integer_id.h">
@@ -44,10 +65,43 @@
     <ClInclude Include="uniquename.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dataholder.h">
+    <ClInclude Include="grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="grid.h">
+    <ClInclude Include="enum_inclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ref_ptr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="object_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objectid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="templated_using_declarations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="member_templates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="abstract_interface_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="id_and_index_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fake_virtual_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interface_operators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enum_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data_policies.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
