@@ -14,66 +14,66 @@ plain virtual call.
 
 namespace fake_virtual_functions
 {
-	class Interface;
+    class Interface;
 
-	class Interface
-	{
-	public:
-		using function_type = std::string(void const*);
-		//using function_type = std::string(*)(Interface const*);
+    class Interface
+    {
+    public:
+        using function_type = std::string(void const*);
+        //using function_type = std::string(*)(Interface const*);
 
-		explicit Interface(function_type function) :
-			mp_function(function)
-		{}
-		virtual ~Interface() = default;
+        explicit Interface(function_type function) :
+            mp_function(function)
+        {}
+        virtual ~Interface() = default;
 
-		virtual std::string virtual_do_something() const = 0;
+        virtual std::string virtual_do_something() const = 0;
 
-		std::string fake_virtual_do_something() const
-		{ 
-			return (*mp_function)(this);
-			//return (*mp_function)(static_cast<void const*>(this));
-		}
+        std::string fake_virtual_do_something() const
+        { 
+            return (*mp_function)(this);
+            //return (*mp_function)(static_cast<void const*>(this));
+        }
 
-	private:
-		function_type* mp_function;
-	};
+    private:
+        function_type* mp_function;
+    };
 
-	class Derived1 :
-		public Interface
-	{
-	public:
-		static std::string external_do_something(void const* object)
-		//static std::string external_do_something(Interface const* object)
-		{
-			return static_cast<Derived1 const*>(object)->actual_do_something();
-		}
+    class Derived1 :
+        public Interface
+    {
+    public:
+        static std::string external_do_something(void const* object)
+        //static std::string external_do_something(Interface const* object)
+        {
+            return static_cast<Derived1 const*>(object)->actual_do_something();
+        }
 
-		Derived1(std::string const& data) :
-			Interface(external_do_something),
-			m_data(data)
-		{
-		}
+        Derived1(std::string const& data) :
+            Interface(external_do_something),
+            m_data(data)
+        {
+        }
 
-		~Derived1() override = default;
+        ~Derived1() override = default;
 
-		std::string virtual_do_something() const override
-		{ 
-			return actual_do_something();
-		}
+        std::string virtual_do_something() const override
+        { 
+            return actual_do_something();
+        }
 
-		inline
-		std::string actual_do_something() const
-		{
-			return m_data;
-		}
+        inline
+        std::string actual_do_something() const
+        {
+            return m_data;
+        }
 
-	private:
-		std::string m_data;
-	};
+    private:
+        std::string m_data;
+    };
 
 
-	void test();
+    void test();
 
 } // namespace fake_virtual_functions
 

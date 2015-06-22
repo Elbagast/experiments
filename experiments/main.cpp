@@ -142,15 +142,15 @@ int main(int argc, char* argv[])
     delete refptrtest4;
 
 
-	member_templates::test();
+    member_templates::test();
 
-	abstract_interface_test::test();
+    abstract_interface_test::test();
 
-	fake_virtual_functions::test();
+    fake_virtual_functions::test();
 
-	interface_operators::test();
+    interface_operators::test();
 
-	data_policies::test();
+    data_policies::test();
 
     return 0;
 }
