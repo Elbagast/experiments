@@ -23,7 +23,7 @@ public:
     void setWidth(size_type width)     { m_width = width; }
 
     size_type getHeight() const        { return m_height; }
-    void setHeigt(size_type height)    { m_height = height; }
+    void setHeight(size_type height)   { m_height = height; }
 
 private:
     size_type m_width, m_height;
