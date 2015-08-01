@@ -18,7 +18,7 @@ namespace enum_string
         using integer_type = I;
         using string_type = S;
 
-        static_assert(std::is_integral_type<>::value(integer_type), "Cannot build with a type that is not an integer type");
+        static_assert(std::is_integral_type<integer_type>::value, "Cannot build with a type that is not an integer type");
 
         static bool has_enum_string(string_type const& value)
         {

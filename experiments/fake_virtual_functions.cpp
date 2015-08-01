@@ -6,10 +6,10 @@
 
 void fake_virtual_functions::test()
 {
+    std::cout << "Fake Virtual Functions" << std::endl << std::endl;
+
     std::unique_ptr<Interface> ptr{ new Derived1("blah blah blah Mr Freeman") };
 
-    std::cout << std::endl;
-    std::cout << "Fake Virtual Functions" << std::endl;
     std::cout << "sizeof(Interface) = " << sizeof(Interface) << std::endl;
     std::cout << "sizeof(Derived1) = " << sizeof(Derived1) << std::endl;
     std::cout << "sizeof(std::string) = " << sizeof(std::string) << std::endl;
@@ -50,5 +50,5 @@ void fake_virtual_functions::test()
 
     std::cout << std::endl << "Time for " << count << " fake virtual calls: " << fv_duration << "ms" << std::endl;
 
-
+    std::cout << "----------------------------------------" << std::endl;
 }

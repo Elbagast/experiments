@@ -4,25 +4,29 @@
 /*
 The id class references an object using an id_number_type
 */
-class Object;
 
-using id_number_type = unsigned int;
-class ObjectID
+namespace object_manager
 {
-public:
-    explicit ObjectID(id_number_type value = 0);
-    ~ObjectID();
+    class Object;
 
-    ObjectID(ObjectID const& other);
-    ObjectID& operator=(ObjectID const& other);
-    ObjectID(ObjectID && other);
-    ObjectID& operator=(ObjectID && other);
+    using id_number_type = unsigned int;
+    class ObjectID
+    {
+    public:
+        explicit ObjectID(id_number_type value = 0);
+        ~ObjectID();
 
-    id_number_type value() const;
-    Object* get() const;
+        ObjectID(ObjectID const& other);
+        ObjectID& operator=(ObjectID const& other);
+        ObjectID(ObjectID && other);
+        ObjectID& operator=(ObjectID && other);
 
-private:
-    id_number_type m_value;
-};
+        id_number_type value() const;
+        Object* get() const;
+
+    private:
+        id_number_type m_value;
+    };
+} // object_manager
 
 #endif // OBJECTID_H

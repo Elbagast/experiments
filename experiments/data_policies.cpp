@@ -13,10 +13,9 @@ namespace
 
 void data_policies::test()
 {
+    std::cout << "Data Policies" << std::endl << std::endl;
 
-    std::cout << std::endl;
-    std::cout << "Data Policies" << std::endl << std::boolalpha;
-    std::cout << std::endl;
+    std::cout << std::boolalpha;
 
     Unconstrained_Data<float> ud_float{};
     ud_float.set(5.1);
@@ -47,9 +46,11 @@ void data_policies::test()
     std::cout << "is_fundamental = " << cd_int.is_fundamental() << std::endl; // works
     std::cout << std::endl;
 
-    Constrained_Data<std::string> cd_string{};
+    //Constrained_Data<std::string> cd_string{};
     std::cout << "Constrained_Data<std::string>" << " - fails to compile (what we want)"<< std::endl;
     std::cout << std::endl;
 
     std::cout << std::noboolalpha;
+
+    std::cout << "----------------------------------------" << std::endl;
 }

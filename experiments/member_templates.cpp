@@ -28,8 +28,7 @@ void member_templates::MajorID_Manager::minorid_operation_4<member_templates::Ma
 // Test this code section
 void member_templates::test()
 {
-    std::cout << "Member Templates Specialisation Test" << std::endl;
-    std::cout << std::endl;
+    std::cout << "Member Templates Specialisation Test" << std::endl << std::endl;
 
     MajorID_Manager manager{};
     MajorID majorid{};
@@ -51,5 +50,5 @@ void member_templates::test()
     manager.minorid_operation_4<MajorID>(minorid, majorid, index);
 
 
-    std::cout << std::endl;
+    std::cout << "----------------------------------------" << std::endl;
 }

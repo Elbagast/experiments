@@ -1,19 +1,20 @@
 #include "object_manager.h"
 
+#include <iostream>
 
-Object_Manager::Object_Manager() :
+object_manager::Object_Manager::Object_Manager() :
 m_map{},
 m_next_id_number{ 0 }
 {}
-Object_Manager::~Object_Manager() = default;
+object_manager::Object_Manager::~Object_Manager() = default;
 
-Object_Manager* Object_Manager::getInstance()
+object_manager::Object_Manager* object_manager::Object_Manager::getInstance()
 {
     initialise();
     return m_instance.get();
 }
 
-Object* Object_Manager::getObject(id_number_type id) const
+object_manager::Object* object_manager::Object_Manager::getObject(id_number_type id) const
 {
     if (id != 0)
     {
@@ -24,7 +25,7 @@ Object* Object_Manager::getObject(id_number_type id) const
     return nullptr;
 }
 
-ObjectID Object_Manager::makeObject()
+object_manager::ObjectID object_manager::Object_Manager::makeObject()
 {
     id_number_type new_id_number = ++m_next_id_number;
     //m_map.emplace(new_id_number, );
@@ -32,7 +33,7 @@ ObjectID Object_Manager::makeObject()
     return ObjectID(new_id_number); // increments ref count on construction
 }
 
-void Object_Manager::incrementRefCount(id_number_type id) // these have to be just the number, or a reference to an ObjectID...
+void object_manager::Object_Manager::incrementRefCount(id_number_type id) // these have to be just the number, or a reference to an ObjectID...
 {
     if (id != 0)
     {
@@ -44,7 +45,7 @@ void Object_Manager::incrementRefCount(id_number_type id) // these have to be ju
     }
     //else the id is invalid...uh oh
 }
-void Object_Manager::decrementRefCount(id_number_type id)
+void object_manager::Object_Manager::decrementRefCount(id_number_type id)
 {
     if (id != 0)
     {
@@ -58,10 +59,32 @@ void Object_Manager::decrementRefCount(id_number_type id)
     }
 }
 
-void Object_Manager::initialise()
+void object_manager::Object_Manager::initialise()
 {
     if (!m_instance)
         m_instance.reset(new Object_Manager);
 }
 
-std::unique_ptr<Object_Manager> Object_Manager::m_instance{ nullptr };
+std::unique_ptr<object_manager::Object_Manager> object_manager::Object_Manager::m_instance{ nullptr };
+
+
+void object_manager::test()
+{
+    std::cout << "Object Manager" << std::endl << std::endl;
+
+    ObjectID oid2 = ObjectID();
+    Object* p = nullptr;
+    {
+        ObjectID oid1 = Object_Manager::getInstance()->makeObject();
+
+        std::cout << oid1.get()->x << std::endl;
+        std::cout << oid1.get()->y << std::endl;
+        p = oid1.get();
+        oid2 = oid1;
+    }
+    // this value is now nonsense as p is dangling
+    std::cout << p->x << std::endl;
+    std::cout << oid2.get()->x << std::endl;
+
+    std::cout << "----------------------------------------" << std::endl;
+}

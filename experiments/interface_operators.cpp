@@ -14,8 +14,7 @@ void interface_operators::external_set_something(Interface& object, int value)
 
 void interface_operators::test()
 {
-    std::cout << "Interface Operators Test" << std::endl;
-    std::cout << std::endl;
+    std::cout << "Interface Operators Test" << std::endl << std::endl;
 
     Derived thing{20};
     //Interface& thing2{thing};
@@ -23,5 +22,5 @@ void interface_operators::test()
     //std::cout << external_get_something(thing2) << std::endl;
 
 
-    std::cout << std::endl;
+    std::cout << "----------------------------------------" << std::endl;
 }

@@ -45,12 +45,30 @@
     <ClCompile Include="data_policies.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="enum_stuff2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="varadic_templates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reference_counting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data_pool_value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enum_stuff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enum_data_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="grid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="integer_id.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parse_id.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="enum_stuff.h">
@@ -59,28 +77,13 @@
     <ClInclude Include="enum_data_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="datapoolvalue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uniquename.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="enum_inclass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ref_ptr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="object_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="objectid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="templated_using_declarations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="member_templates.h">
@@ -102,6 +105,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data_policies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="variadic_templates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enum_stuff2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="two_key_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reference_counting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data_pool_value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enum_in_class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
