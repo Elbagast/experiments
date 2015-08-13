@@ -19,6 +19,7 @@ UNFINISHED
 #include <string>
 #include <utility>
 #include <typeinfo>
+#include <map>
 
 namespace variadic_templates
 {
@@ -178,6 +179,73 @@ namespace variadic_templates
     };
 
     //std::string const Concrete_Element::s_type_string = std::string("Concrete_Type");
+
+
+
+    //=====================================================
+
+    /*
+    std::map<Key, std::tuple<Args..., Compare, Allocator> access to tuple elements via iterators... 
+    
+    It isn't clear to me why these are failing...
+    
+    */
+
+    /*
+    template <std::size_t Index, typename Key, typename Tuple, typename Compare, typename Allocator, typename... Types>
+    auto get_tuple_element(typename std::map<Key, std::tuple<Types...>, Compare, Allocator>::iterator map_iterator) -> decltype(std::get<Index>(map_iterator->second))
+    {
+    return std::get<Index>(map_iterator->second);
+    }
+
+    template <std::size_t Index, typename Key, typename Tuple, typename Compare, typename Allocator, typename... Types>
+    auto get_tuple_element(typename std::map<Key, std::tuple<Types...>, Compare, Allocator>::const_iterator map_iterator) -> decltype(std::get<Index>(map_iterator->second))
+    {
+    return std::get<Index>(map_iterator->second);
+    }
+    */
+
+    template <std::size_t Index, typename Map>
+    typename std::tuple_element<Index, typename Map::mapped_type>::type& get_tuple_element(typename Map::iterator map_iterator)
+    {
+        return std::get<Index>(map_iterator->second);
+    }
+
+    template <std::size_t Index, typename Map>
+    typename std::tuple_element<Index, typename Map::mapped_type>::type const& get_tuple_element(typename Map::const_iterator map_iterator)
+    {
+        return std::get<Index>(map_iterator->second);
+    }
+  
+    //template <typename K, typename T, typename Compare, typename Allocator>
+    //using some_iterator = std::map<K, T, Compare, Allocator>::iterator;
+
+    
+    template <typename Map>
+    struct Tuple_Map_Helper
+    {
+        using map_type = Map;
+        using iterator = typename map_type::iterator;
+        using const_iterator = typename map_type::const_iterator;
+
+        using tuple_type = typename map_type::mapped_type;
+
+        template <std::size_t I>
+        using tuple_element_type = typename std::tuple_element < I, typename tuple_type >::type;
+
+        template <std::size_t I>
+        static typename tuple_element_type<I>& get_tuple_element(typename iterator map_iterator)
+        {
+            return std::get<I>(map_iterator->second);
+        }
+
+        template <std::size_t I>
+        static typename tuple_element_type<I> const& get_tuple_element(typename const_iterator map_iterator)
+        {
+            return std::get<I>(map_iterator->second);
+        }
+
+    };
 
     void test();
 

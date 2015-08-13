@@ -74,6 +74,7 @@
     <ClCompile Include="enum_stuff2.cpp" />
     <ClCompile Include="fake_virtual_functions.cpp" />
     <ClCompile Include="grid.cpp" />
+    <ClCompile Include="indexable_tuple.cpp" />
     <ClCompile Include="integer_id.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="member_templates.cpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="fake_virtual_functions.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="id_and_index_test.h" />
+    <ClInclude Include="indexable_tuple.h" />
     <ClInclude Include="integer_id.h" />
     <ClInclude Include="interface_operators.h" />
     <ClInclude Include="member_templates.h" />

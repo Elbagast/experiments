@@ -13,6 +13,7 @@
 #include "enum_stuff2.h"
 #include "variadic_templates.h"
 #include "reference_counting.h"
+#include "indexable_tuple.h"
 
 template <char C>
 struct Char_Type
@@ -85,6 +86,8 @@ int main(int argc, char* argv[])
     variadic_templates::test();
 
     reference_counting::test();
+
+    indexable_tuple::test();
 
     return 0;
 }
