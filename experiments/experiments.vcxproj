@@ -76,12 +76,15 @@
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="indexable_tuple.cpp" />
     <ClCompile Include="integer_id.cpp" />
+    <ClCompile Include="interface_inheritance.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="member_templates.cpp" />
     <ClCompile Include="objectid.cpp" />
     <ClCompile Include="object_manager.cpp" />
     <ClCompile Include="interface_operators.cpp" />
+    <ClCompile Include="question_based_template.cpp" />
     <ClCompile Include="reference_counting.cpp" />
+    <ClCompile Include="std_basic_string_identifier.cpp" />
     <ClCompile Include="varadic_templates.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,12 +100,15 @@
     <ClInclude Include="id_and_index_test.h" />
     <ClInclude Include="indexable_tuple.h" />
     <ClInclude Include="integer_id.h" />
+    <ClInclude Include="interface_inheritance.h" />
     <ClInclude Include="interface_operators.h" />
     <ClInclude Include="member_templates.h" />
     <ClInclude Include="objectid.h" />
     <ClInclude Include="object_manager.h" />
     <ClInclude Include="data_pool_value.h" />
+    <ClInclude Include="question_based_template.h" />
     <ClInclude Include="reference_counting.h" />
+    <ClInclude Include="std_basic_string_identifier.h" />
     <ClInclude Include="two_key_map.h" />
     <ClInclude Include="variadic_templates.h" />
   </ItemGroup>

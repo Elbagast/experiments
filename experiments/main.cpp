@@ -14,6 +14,9 @@
 #include "variadic_templates.h"
 #include "reference_counting.h"
 #include "indexable_tuple.h"
+#include "question_based_template.h"
+#include "std_basic_string_identifier.h"
+#include "interface_inheritance.h"
 
 template <char C>
 struct Char_Type
@@ -88,6 +91,13 @@ int main(int argc, char* argv[])
     reference_counting::test();
 
     indexable_tuple::test();
+
+    question_based_template::test();
+
+    std_basic_string_identifier::test();
+
+    interface_inheritance::part1::test();
+    interface_inheritance::part2::test();
 
     return 0;
 }
