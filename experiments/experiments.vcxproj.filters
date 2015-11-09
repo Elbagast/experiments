@@ -78,6 +78,21 @@
     <ClCompile Include="interface_inheritance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="macro_class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="macro_enum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="function_traits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="explicit_template_instantiation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="explicit_template_instantiation_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="integer_id.h">
@@ -147,6 +162,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface_inheritance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="macro_class.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="macro_enum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="function_traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="explicit_template_instantiation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="explicit_template_instantiation_test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

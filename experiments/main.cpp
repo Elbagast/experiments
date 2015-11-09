@@ -17,6 +17,10 @@
 #include "question_based_template.h"
 #include "std_basic_string_identifier.h"
 #include "interface_inheritance.h"
+#include "macro_class.h"
+#include "macro_enum.h"
+#include "function_traits.h"
+#include "explicit_template_instantiation_test.h"
 
 template <char C>
 struct Char_Type
@@ -98,6 +102,14 @@ int main(int argc, char* argv[])
 
     interface_inheritance::part1::test();
     interface_inheritance::part2::test();
+
+    macro_class::test();
+
+    macro_enum::test();
+
+    function_traits::test();
+
+    explicit_template_instantiation::test();
 
     return 0;
 }

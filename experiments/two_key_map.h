@@ -13,14 +13,14 @@ UNFINISHED
 namespace two_key_map
 {
 
-    template <typename First_Key, typename Second_Key, typename T>
+    template <typename T_Short_Key, typename T_Long_Key, typename T>
     class Two_Key_Map
     {
     public:
-        using first_key_type = First_Key;
-        using second_key_type = Second_Key;
+        using short_key_type = T_Short_Key;
+        using long_key_type = T_Long_Key;
     private:
-        using internal_key_type = std::pair < first_key_type, second_key_type >;
+        using internal_key_type = std::pair < short_key_type, long_key_type >;
         using internal_map_type = std::map < internal_key_type, T > ;
         using internal_value_type = typename internal_map_type::value_type;
     public:
