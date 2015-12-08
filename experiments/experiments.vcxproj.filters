@@ -93,6 +93,9 @@
     <ClCompile Include="explicit_template_instantiation_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="templated_observer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="integer_id.h">
@@ -177,6 +180,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="explicit_template_instantiation_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="templated_observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

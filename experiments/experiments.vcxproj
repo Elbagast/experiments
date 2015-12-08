@@ -90,6 +90,7 @@
     <ClCompile Include="question_based_template.cpp" />
     <ClCompile Include="reference_counting.cpp" />
     <ClCompile Include="std_basic_string_identifier.cpp" />
+    <ClCompile Include="templated_observer.cpp" />
     <ClCompile Include="varadic_templates.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +120,7 @@
     <ClInclude Include="question_based_template.h" />
     <ClInclude Include="reference_counting.h" />
     <ClInclude Include="std_basic_string_identifier.h" />
+    <ClInclude Include="templated_observer.h" />
     <ClInclude Include="two_key_map.h" />
     <ClInclude Include="variadic_templates.h" />
   </ItemGroup>

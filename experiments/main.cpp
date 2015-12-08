@@ -21,6 +21,7 @@
 #include "macro_enum.h"
 #include "function_traits.h"
 #include "explicit_template_instantiation_test.h"
+#include "templated_observer.h"
 
 template <char C>
 struct Char_Type
@@ -110,6 +111,9 @@ int main(int argc, char* argv[])
     function_traits::test();
 
     explicit_template_instantiation::test();
+
+    templated_observer::test();
+
 
     return 0;
 }
