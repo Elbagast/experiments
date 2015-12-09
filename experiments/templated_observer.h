@@ -23,7 +23,7 @@ namespace templated_observer
         void(Observer::*T_slot_value_destroyed)(Key const&)// = &Observer::slot_value_destroyed
         >
     class Internal_Manager
-    {        
+    {
     public:
         using key_type = Key;
         using value_type = Value;
@@ -173,13 +173,14 @@ namespace templated_observer
 
         internal_manager_type m_manager;
     };
+    // This class cannot compile because the required member functions to not exist
     /*
     class Failure_Manager
     {
     public:
         using key_type = int;
         using value_type = std::string;
-        using internal_manager_type = Internal_Manager < key_type, value_type, Failure_Manager >; // now it hates this
+        using internal_manager_type = Default_Internal_Manager < key_type, value_type, Failure_Manager >; // now it hates this
         
         Failure_Manager();
 
