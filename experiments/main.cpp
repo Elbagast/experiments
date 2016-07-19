@@ -1,3 +1,57 @@
+﻿
+namespace typedef_testing
+{
+    namespace internal
+    {
+        char const diff_array[2]{};
+        auto const diff = &diff_array[1] - &diff_array[0];
+    }
+    using size_t = decltype(sizeof(void*));
+    using nullptr_t = decltype(nullptr);
+    using ptrdiff_t = decltype(internal::diff);
+}
+
+// test of typedefs
+#include <cstdint>
+namespace fixed_int_test
+{
+	using int8_t = std::int8_t;
+	using int16_t = std::int16_t;
+	using int32_t = std::int32_t;
+	using int64_t = std::int64_t;
+
+	using int_fast8_t = std::int_fast8_t;
+	using int_fast16_t = std::int_fast16_t;
+	using int_fast32_t = std::int_fast32_t;
+	using int_fast64_t = std::int_fast64_t;
+
+	using int_least8_t = std::int_least8_t;
+	using int_least16_t = std::int_least16_t;
+	using int_least32_t = std::int_least32_t;
+	using int_least64_t = std::int_least64_t;
+
+	using intmax_t = std::intmax_t;
+	using intptr_t = std::intptr_t;
+
+	using uint8_t = std::uint8_t;
+	using uint16_t = std::uint16_t;
+	using uint32_t = std::uint32_t;
+	using uint64_t = std::uint64_t;
+
+	using uint_fast8_t = std::uint_fast8_t;
+	using uint_fast16_t = std::uint_fast16_t;
+	using uint_fast32_t = std::uint_fast32_t;
+	using uint_fast64_t = std::uint_fast64_t;
+
+	using uint_least8_t = std::uint_least8_t;
+	using uint_least16_t = std::uint_least16_t;
+	using uint_least32_t = std::uint_least32_t;
+	using uint_least64_t = std::uint_least64_t;
+
+	using uintmax_t = std::uintmax_t;
+	using uintptr_t = std::uintptr_t;
+}
+
 #include "enum_stuff.h"
 #include "integer_id.h"
 #include "enum_data_manager.h"
@@ -22,19 +76,82 @@
 #include "function_traits.h"
 #include "explicit_template_instantiation_test.h"
 #include "templated_observer.h"
+#include "pointer_identification.h"
+#include "bit_radians.h"
+#include "template_string_parameter.h"
+#include "constructor_caller.h"
 
-template <char C>
-struct Char_Type
+#include <string>
+
+
+void string_literals_test()
 {
-    char m_char{ C };
+	using namespace std::string_literals; // enables s-suffix for std::string literals
+
+	// Character literals
+	auto c0 = 'A'; // char
+	auto c1 = u8'A'; // char
+	auto c2 = L'A'; // wchar_t
+	auto c3 = u'A'; // char16_t
+	auto c4 = U'A'; // char32_t
+
+					// String literals
+	auto s0 = "hello"; // const char*
+	auto s1 = u8"hello"; // const char*, encoded as UTF-8
+	auto s2 = L"hello"; // const wchar_t*
+	auto s3 = u"hello"; // const char16_t*, encoded as UTF-16
+	auto s4 = U"hello"; // const char32_t*, encoded as UTF-32
+
+						// Raw string literals containing unescaped \ and "
+	auto R0 = R"("Hello \ world")"; // const char*
+	auto R1 = u8R"("Hello \ world")"; // const char*, encoded as UTF-8
+	auto R2 = LR"("Hello \ world")"; // const wchar_t*
+	auto R3 = uR"("Hello \ world")"; // const char16_t*, encoded as UTF-16
+	auto R4 = UR"("Hello \ world")"; // const char32_t*, encoded as UTF-32
+
+									 // Combining string literals with standard s-suffix
+	auto S0 = "hello"s; // std::string
+	auto S1 = u8"hello"s; // std::string
+	auto S2 = L"hello"s; // std::wstring
+	auto S3 = u"hello"s; // std::u16string
+	auto S4 = U"hello"s; // std::u32string
+
+						 // Combining raw string literals with standard s-suffix
+	auto S5 = R"("Hello \ world")"s; // std::string from a raw const char*
+	auto S6 = u8R"("Hello \ world")"s; // std::string from a raw const char*, encoded as UTF-8
+	auto S7 = LR"("Hello \ world")"s; // std::wstring from a raw const wchar_t*
+	auto S8 = uR"("Hello \ world")"s; // std::u16string from a raw const char16_t*, encoded as UTF-16
+	auto S9 = UR"("Hello \ world")"s; // std::u32string from a raw const char32_t*, encoded as UTF-32
+
+
+									  // ASCII smiling face
+	const char*     ss1 = ":-)";
+
+	// UTF-16 (on Windows) encoded WINKING FACE (U+1F609)
+	const wchar_t*  ss2 = L"😉 = \U0001F609 is ;-)";
+
+	// UTF-8  encoded SMILING FACE WITH HALO (U+1F607)
+	const char*     ss3 = u8"😇 = \U0001F607 is O:-)";
+
+	// UTF-16 encoded SMILING FACE WITH OPEN MOUTH (U+1F603)
+	const char16_t* ss4 = u"😃 = \U0001F603 is :-D";
+
+	// UTF-32 encoded SMILING FACE WITH SUNGLASSES (U+1F60E)
+	const char32_t* ss5 = U"😎 = \U0001F60E is B-)";
+}
+
+
+template <typename T>
+T default_construct()
+{
+	return T();
 };
 
-
-/*
-Quick typedef test..
-*/
-template<typename T>
-using ref_ptr = T*;
+template <typename T>
+decltype(auto) auto_test()
+{
+	return default_construct<T>();
+}
 
 
 int main(int argc, char* argv[])
@@ -113,6 +230,21 @@ int main(int argc, char* argv[])
     explicit_template_instantiation::test();
 
     templated_observer::test();
+
+    pointer_identification::test();
+
+    //bit_radians::test();
+
+	template_string_parameter::test();
+
+	constructor_caller::test();
+
+
+	std::cout << "sizeof(int) = " << sizeof(int) << std::endl;
+	std::cout << "sizeof(std::size_t) = " << sizeof(std::size_t) << std::endl;
+
+	auto l_int = auto_test<int>();
+
 
 
     return 0;

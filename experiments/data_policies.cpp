@@ -18,7 +18,7 @@ void data_policies::test()
     std::cout << std::boolalpha;
 
     Unconstrained_Data<float> ud_float{};
-    ud_float.set(5.1);
+    ud_float.set(5.1f);
     std::cout << "Unconstrained_Data<float>" << std::endl;
     std::cout << "get = " << ud_float.get() << std::endl;
     std::cout << "is_constrained = " << ud_float.is_constrained() << std::endl;

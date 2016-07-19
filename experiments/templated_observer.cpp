@@ -124,5 +124,7 @@ void templated_observer::test()
     }
     std::cout << std::endl;
 
+    //Observed_Class<void, void> test_null{};
+
     std::cout << "----------------------------------------" << std::endl;
 }

@@ -96,6 +96,18 @@
     <ClCompile Include="templated_observer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pointer_identification.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bit_radians.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="template_string_parameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="constructor_caller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="integer_id.h">
@@ -183,6 +195,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="templated_observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="seperate_display_logic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pointer_identification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bit_radians.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="number_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="template_string_parameter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constructor_caller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,11 +9,25 @@ namespace
     void do_stuff1(int); // this doesn't like overloads...
     float do_stuff2(int, float);
 
+    int some_function(int, int);
+    int some_other_function(int, int);
+
     struct Test_Thing
     {
         void f();
         void f(int);
         int f2(int, double) const;
+
+        int f3(int, double) const;
+        int f4(int, double);
+    };
+
+    struct Test_Functor
+    {
+        int operator()(int, int)
+        {
+            return 0;
+        }
     };
 
 }
@@ -48,8 +62,8 @@ void function_traits::test()
     using Test_Thing_f_traits = decltype(get_member_function_traits<void(Test_Thing::*)()>(&Test_Thing::f));
     using Test_Thing_f_alt_traits = decltype(get_member_function_traits<void(Test_Thing::*)(int)>(&Test_Thing::f));
 
-    using Test_Thing_f_type = Test_Thing_f_traits::function_type;
-    using Test_Thing_f_alt_type = Test_Thing_f_alt_traits::function_type;
+    //using Test_Thing_f_type = Test_Thing_f_traits::function_type;
+    //using Test_Thing_f_alt_type = Test_Thing_f_alt_traits::function_type;
 
     using Test_Thing_f2_traits = Member_Function_Traits < decltype(&Test_Thing::f2) >;
 
@@ -73,13 +87,32 @@ void function_traits::test()
 
     //static_assert(Has_No_Args< decltype(do_stuff1) >::value == true, "bad arg count");
     static_assert(Has_No_Args< decltype(do_stuff2) >::value == false, "bad arg count");
-    static_assert(Has_No_Args< Test_Thing_f_type >::value == true, "bad arg count");
+    //static_assert(Has_No_Args< Test_Thing_f_type >::value == true, "bad arg count");
     static_assert(Has_No_Args< decltype(&Test_Thing::f2) >::value == false, "bad arg count");
 
     //static_assert(Has_Arg_Count_Of< decltype(do_stuff1), 0>::value == true, "bad arg count");
     static_assert(Has_Arg_Count_Of< decltype(do_stuff2), 2>::value == true, "bad arg count");
-    static_assert(Has_Arg_Count_Of< Test_Thing_f_type, 0>::value == true, "bad arg count");
+    //static_assert(Has_Arg_Count_Of< Test_Thing_f_type, 0>::value == true, "bad arg count");
     static_assert(Has_Arg_Count_Of< decltype(&Test_Thing::f2), 2>::value == true, "bad arg count");
+
+    static_assert(Is_Function_Match<decltype(some_function), decltype(some_other_function)>::value == true, "bad function match");
+    static_assert(Is_Function_Match<decltype(some_function), int(int, int)>::value == true, "bad function match");
+    static_assert(Is_Function_Match<decltype(some_function), decltype(do_stuff2)>::value == false, "bad function match");
+
     
+    static_assert(Is_Function_Match<decltype(&Test_Thing::f2), decltype(&Test_Thing::f3)>::value == true, "bad function match");
+    static_assert(Is_Function_Match<decltype(&Test_Thing::f2), decltype(&Test_Thing::f4)>::value == false, "bad function match");
+    
+
+    // Functors...
+    //using Test_Functor_traits = Function_Traits < Test_Functor >;
+
+    //static_assert(Test_Functor_traits::arg_count == 2, "bad arg count");
+    //static_assert(std::is_same<Test_Functor_traits::return_type, int>::value, "bad return type count");
+    //static_assert(std::is_same<Test_Functor_traits::arg<0>::type, int>::value, "bad arg type");
+    //static_assert(std::is_same<Test_Functor_traits::arg<1>::type, int>::value, "bad arg type");
+
+    //static_assert(Is_Function_Match<int(int, int), Test_Functor>::value == true, "bad function match");
+
     std::cout << "----------------------------------------" << std::endl;
 }

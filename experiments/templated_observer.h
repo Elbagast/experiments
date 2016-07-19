@@ -196,6 +196,51 @@ namespace templated_observer
         internal_manager_type m_manager;
     };
     */
+
+    /*
+    Want:
+    - A class that references another and uses a supplied member function of it.
+    - A class that has identical functionality but does not.
+    - A template that is either(?) so that the implementation is shared and not duplicated.
+    */
+
+    class No_Signals
+    {
+    public:
+        void f()
+        {
+            
+        }
+    };
+
+    class A_Signals
+    {
+    public:
+        void f()
+        {
+            //stuff happens...
+        }
+    };
+
+
+    template <typename Signal_Box = No_Signals>
+    class Signal_Origin
+    {
+    public:
+        Signal_Origin(Signal_Box const& a_signal_box):
+            m_signal_box(a_signal_box)
+        {}
+
+        void f()
+        {
+            m_signal_box.f();
+        }
+
+    private:
+        Signal_Box m_signal_box;
+    };
+
+
     void test();
 } // namespace templated_observer
 
