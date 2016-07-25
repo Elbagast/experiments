@@ -51,9 +51,7 @@ namespace template_string_parameter
 
 	// So can we get from char const[] to this?
 	// or from constexpr char const* to this?
-
-
-
+	
 
 	#define DECLTYPE_C_STRING_CLASS(_arg) C_String_##_arg
 

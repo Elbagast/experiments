@@ -67,6 +67,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="abstract_interface_test.cpp" />
+    <ClCompile Include="ascii_string.cpp" />
     <ClCompile Include="bit_radians.cpp" />
     <ClCompile Include="constructor_caller.cpp" />
     <ClCompile Include="data_policies.cpp" />
@@ -82,6 +83,7 @@
     <ClCompile Include="indexable_tuple.cpp" />
     <ClCompile Include="integer_id.cpp" />
     <ClCompile Include="interface_inheritance.cpp" />
+    <ClCompile Include="iterator_properties.cpp" />
     <ClCompile Include="macro_class.cpp" />
     <ClCompile Include="macro_enum.cpp" />
     <ClCompile Include="main.cpp" />
@@ -99,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="abstract_interface_test.h" />
+    <ClInclude Include="ascii_string.h" />
     <ClInclude Include="bit_radians.h" />
     <ClInclude Include="constructor_caller.h" />
     <ClInclude Include="data_policies.h" />
@@ -117,6 +120,7 @@
     <ClInclude Include="integer_id.h" />
     <ClInclude Include="interface_inheritance.h" />
     <ClInclude Include="interface_operators.h" />
+    <ClInclude Include="iterator_properties.h" />
     <ClInclude Include="macro_class.h" />
     <ClInclude Include="macro_enum.h" />
     <ClInclude Include="member_templates.h" />

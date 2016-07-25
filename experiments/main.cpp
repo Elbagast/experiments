@@ -80,6 +80,8 @@ namespace fixed_int_test
 #include "bit_radians.h"
 #include "template_string_parameter.h"
 #include "constructor_caller.h"
+#include "ascii_string.h"
+#include "iterator_properties.h"
 
 #include <string>
 
@@ -239,9 +241,10 @@ int main(int argc, char* argv[])
 
 	constructor_caller::test();
 
+	ascii::test();
 
-	std::cout << "sizeof(int) = " << sizeof(int) << std::endl;
-	std::cout << "sizeof(std::size_t) = " << sizeof(std::size_t) << std::endl;
+	iterator_properties::test();
+
 
 	auto l_int = auto_test<int>();
 

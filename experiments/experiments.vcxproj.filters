@@ -108,6 +108,12 @@
     <ClCompile Include="constructor_caller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ascii_string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iterator_properties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="integer_id.h">
@@ -213,6 +219,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="constructor_caller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ascii_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iterator_properties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

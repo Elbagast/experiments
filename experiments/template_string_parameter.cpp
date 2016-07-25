@@ -17,7 +17,7 @@ void template_string_parameter::test()
 
 	//std::cout << get_array("moo").get() << std::endl;
 
-
+	//auto ca = "mooooo"_ca;
 
 	std::cout << "----------------------------------------" << std::endl;
 }
