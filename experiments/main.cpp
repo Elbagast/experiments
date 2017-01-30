@@ -1,5 +1,4 @@
-﻿
-namespace typedef_testing
+﻿namespace typedef_testing
 {
     namespace internal
     {
@@ -82,6 +81,9 @@ namespace fixed_int_test
 #include "constructor_caller.h"
 #include "ascii_string.h"
 #include "iterator_properties.h"
+#include "float_sigfigs.h"
+#include "tuple_sizes.h"
+#include "has_typedef.h"
 
 #include <string>
 
@@ -245,10 +247,49 @@ int main(int argc, char* argv[])
 
 	iterator_properties::test();
 
+	float_sigfigs::test();
 
+	tuple_sizes::test();
+
+	/*
 	auto l_int = auto_test<int>();
 
+	std::cout << std::string("©").size() << ' ' << static_cast<int>(static_cast<unsigned char>('©')) << std::endl;
+	std::cout << std::string(u8"©").size() << std::endl;
+	std::cout << std::string("\u00A9").size() << std::endl;
+	std::cout << std::string(u8"\u00A9").size() << std::endl;
+	std::cout << std::string("\128").size() << std::endl;
+	std::cout << std::string(u8"\128").size() << std::endl;
 
 
+
+	std::string s1 = "©";
+	std::string s2 = u8"©";
+	std::string s3 = "\u00A9";
+	std::string s4 = u8"\u00A9";
+
+	auto unicode_out = [](std::string const& a_string)
+	{
+		std::cout << std::hex << std::showbase;
+
+		for (auto l_char : a_string)
+		{
+			std::cout << static_cast<unsigned int>(static_cast<unsigned char>(l_char)) << " ";
+		}
+		std::cout << std::endl;
+		std::cout << std::dec << std::noshowbase;
+	};
+
+
+	std::cout << s1 << std::endl;
+	std::cout << s2 << std::endl;
+	std::cout << s3 << std::endl;
+	std::cout << s4 << std::endl;
+
+	unicode_out(s1);
+	unicode_out(s2);
+	unicode_out(s3);
+	unicode_out(s4);
+	*/
     return 0;
 }

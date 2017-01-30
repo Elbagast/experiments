@@ -78,6 +78,7 @@
     <ClCompile Include="explicit_template_instantiation.cpp" />
     <ClCompile Include="explicit_template_instantiation_test.cpp" />
     <ClCompile Include="fake_virtual_functions.cpp" />
+    <ClCompile Include="float_sigfigs.cpp" />
     <ClCompile Include="function_traits.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="indexable_tuple.cpp" />
@@ -97,12 +98,14 @@
     <ClCompile Include="std_basic_string_identifier.cpp" />
     <ClCompile Include="templated_observer.cpp" />
     <ClCompile Include="template_string_parameter.cpp" />
+    <ClCompile Include="tupe_sizes.cpp" />
     <ClCompile Include="varadic_templates.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="abstract_interface_test.h" />
     <ClInclude Include="ascii_string.h" />
     <ClInclude Include="bit_radians.h" />
+    <ClInclude Include="composite_object.h" />
     <ClInclude Include="constructor_caller.h" />
     <ClInclude Include="data_policies.h" />
     <ClInclude Include="enum_data_manager.h" />
@@ -113,8 +116,10 @@
     <ClInclude Include="explicit_template_instantiation.h" />
     <ClInclude Include="explicit_template_instantiation_test.h" />
     <ClInclude Include="fake_virtual_functions.h" />
+    <ClInclude Include="float_sigfigs.h" />
     <ClInclude Include="function_traits.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="has_typedef.h" />
     <ClInclude Include="id_and_index_test.h" />
     <ClInclude Include="indexable_tuple.h" />
     <ClInclude Include="integer_id.h" />
@@ -135,6 +140,7 @@
     <ClInclude Include="std_basic_string_identifier.h" />
     <ClInclude Include="templated_observer.h" />
     <ClInclude Include="template_string_parameter.h" />
+    <ClInclude Include="tuple_sizes.h" />
     <ClInclude Include="two_key_map.h" />
     <ClInclude Include="variadic_templates.h" />
   </ItemGroup>

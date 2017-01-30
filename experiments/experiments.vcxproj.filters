@@ -114,6 +114,12 @@
     <ClCompile Include="iterator_properties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="float_sigfigs.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tupe_sizes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="integer_id.h">
@@ -225,6 +231,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iterator_properties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="composite_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="float_sigfigs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tuple_sizes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="has_typedef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
