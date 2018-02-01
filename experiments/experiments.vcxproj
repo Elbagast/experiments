@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -13,18 +13,19 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C87CD281-CBA8-477A-9699-DC7FCF3ECC02}</ProjectGuid>
     <RootNamespace>experiments</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -72,6 +73,7 @@
     <ClCompile Include="constructor_caller.cpp" />
     <ClCompile Include="data_policies.cpp" />
     <ClCompile Include="data_pool_value.cpp" />
+    <ClCompile Include="enable_if.cpp" />
     <ClCompile Include="enum_data_manager.cpp" />
     <ClCompile Include="enum_stuff.cpp" />
     <ClCompile Include="enum_stuff2.cpp" />
@@ -85,11 +87,13 @@
     <ClCompile Include="integer_id.cpp" />
     <ClCompile Include="interface_inheritance.cpp" />
     <ClCompile Include="iterator_properties.cpp" />
+    <ClCompile Include="lambda_class.cpp" />
     <ClCompile Include="macro_class.cpp" />
     <ClCompile Include="macro_enum.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="member_templates.cpp" />
     <ClCompile Include="objectid.cpp" />
+    <ClCompile Include="object_address.cpp" />
     <ClCompile Include="object_manager.cpp" />
     <ClCompile Include="interface_operators.cpp" />
     <ClCompile Include="pointer_identification.cpp" />
@@ -98,6 +102,7 @@
     <ClCompile Include="std_basic_string_identifier.cpp" />
     <ClCompile Include="templated_observer.cpp" />
     <ClCompile Include="template_string_parameter.cpp" />
+    <ClCompile Include="templating_interface.cpp" />
     <ClCompile Include="tupe_sizes.cpp" />
     <ClCompile Include="varadic_templates.cpp" />
   </ItemGroup>
@@ -108,6 +113,7 @@
     <ClInclude Include="composite_object.h" />
     <ClInclude Include="constructor_caller.h" />
     <ClInclude Include="data_policies.h" />
+    <ClInclude Include="enable_if.hpp" />
     <ClInclude Include="enum_data_manager.h" />
     <ClInclude Include="enum_in_class.h" />
     <ClInclude Include="enum_string.h" />
@@ -126,11 +132,13 @@
     <ClInclude Include="interface_inheritance.h" />
     <ClInclude Include="interface_operators.h" />
     <ClInclude Include="iterator_properties.h" />
+    <ClInclude Include="lambda_class.h" />
     <ClInclude Include="macro_class.h" />
     <ClInclude Include="macro_enum.h" />
     <ClInclude Include="member_templates.h" />
     <ClInclude Include="number_types.h" />
     <ClInclude Include="objectid.h" />
+    <ClInclude Include="object_address.h" />
     <ClInclude Include="object_manager.h" />
     <ClInclude Include="data_pool_value.h" />
     <ClInclude Include="pointer_identification.h" />
@@ -140,6 +148,7 @@
     <ClInclude Include="std_basic_string_identifier.h" />
     <ClInclude Include="templated_observer.h" />
     <ClInclude Include="template_string_parameter.h" />
+    <ClInclude Include="templating_interface.hpp" />
     <ClInclude Include="tuple_sizes.h" />
     <ClInclude Include="two_key_map.h" />
     <ClInclude Include="variadic_templates.h" />

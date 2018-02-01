@@ -149,7 +149,7 @@ namespace templated_observer
 
         std::vector<key_type> get_keys() const;
 
-    protected:
+    //protected:
         void slot_value_created(key_type const& a_key);
         void slot_value_changed(key_type const& a_key);
         void slot_value_destroyed(key_type const& a_key);

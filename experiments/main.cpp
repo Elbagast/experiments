@@ -84,6 +84,10 @@ namespace fixed_int_test
 #include "float_sigfigs.h"
 #include "tuple_sizes.h"
 #include "has_typedef.h"
+#include "enable_if.hpp"
+#include "object_address.h"
+#include "lambda_class.h"
+#include "templating_interface.hpp"
 
 #include <string>
 
@@ -250,6 +254,14 @@ int main(int argc, char* argv[])
 	float_sigfigs::test();
 
 	tuple_sizes::test();
+
+	enable_if::test();
+
+	object_address::test();
+
+	lambda_class::test();
+
+	templating_interface::test();
 
 	/*
 	auto l_int = auto_test<int>();
