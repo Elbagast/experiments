@@ -2,6 +2,7 @@
 #define TEMPLATING_INTERFACE_HPP
 
 #include <tuple>
+#include <vector>
 
 namespace templating_interface
 {
@@ -356,6 +357,425 @@ namespace templating_interface
 		};
 	}
 
+	namespace again
+	{
+		template <typename T>
+		class Tag {};
+
+		template <std::size_t I>
+		class Index_Tag {};
+
+
+
+		// start with stuff that doesn't need anything else
+		class A_Base
+		{
+		public:
+			virtual ~A_Base() = default;
+			virtual void base_func() = 0;
+		};
+
+		template <typename T, typename...Args>
+		class A_Shared_Thing;
+
+		// Next is stuff that is shared but implementation of will be available to the rest
+		template <typename T, typename...Args>
+		class A_Shared
+		{
+		public:
+			virtual ~A_Shared() = default;
+			virtual void shared_func(A_Shared_Thing<T,Args...>*) = 0;
+		};
+
+		// Interface per member
+		template <std::size_t I, typename T>
+		class A_Member
+		{
+		public:
+			virtual ~A_Member() = default;
+
+			virtual void member_func(Index_Tag<I>&&, T const&) = 0;
+		};
+
+		// Member interface gathering
+		template <std::size_t I, std::size_t Last, typename T>
+		class A_All_Members :
+			public A_All_Members<I+1,Last,T>,
+			public virtual A_Member<I,T>
+		{
+		public:
+			~A_All_Members() override = default;
+
+			using A_All_Members<I + 1, Last, T>::member_func;
+			using A_Member<I,T>::member_func;
+		};
+
+		// On the last one don't continue the chain
+		template <std::size_t Last, typename T>
+		class A_All_Members<Last,Last,T> :
+			public virtual A_Member<Last, T>
+		{
+		public:
+			~A_All_Members() override = default;
+
+			using A_Member<Last, T>::member_func;
+		};
+
+		// Interface for a type
+		template <typename T>
+		class A_Data_Part
+		{
+		public:
+			virtual ~A_Data_Part() = default;
+
+			virtual void data_func(Tag<T>&&) = 0;
+		};
+
+
+		// Interface for a type
+		template <typename T>
+		class A_Data :
+			public virtual A_Data_Part<T>,
+			public A_All_Members<0, (std::tuple_size_v<T> - 1), T>
+		{
+			using Inherited_Type = A_All_Members<0, (std::tuple_size_v<T> - 1), T>;
+		public:
+			~A_Data() override = default;
+
+			using A_Data_Part<T>::data_func;
+			using Inherited_Type::member_func; // now has all the overloads.
+		};
+
+		// Gathering all the sections
+		template <typename...Args>
+		class A_All_Data;
+
+		// For one use the data
+		template <typename T>
+		class A_All_Data<T> :
+			public virtual A_Data<T>
+		{
+			using Inh1 = A_Data<T>;
+		public:
+			~A_All_Data() override = default;
+
+			using Inh1::data_func;
+			using Inh1::member_func;
+		};
+
+		// For more than one stitch together
+		template <typename T, typename R, typename...Args>
+		class A_All_Data<T, R, Args...> :
+			public virtual A_Data<T>,
+			public A_All_Data<R,Args...>
+		{
+			using Inh1 = A_Data<T>;
+			using Inh2 = A_All_Data<R, Args...>;
+		public:
+			~A_All_Data() override = default;
+
+			using Inh1::data_func;
+			using Inh1::member_func;
+
+			using Inh2::data_func;
+			using Inh2::member_func;
+		};
+
+		// the final uses all
+		template <typename T, typename...Args>
+		class A_Final :
+			public virtual A_Base,
+			public virtual A_Shared<T,Args...>,
+			public A_All_Data<T,Args...>
+		{
+			using Inh1 = A_Base;
+			using Inh2 = A_Shared<T, Args...>;
+			using Inh3 = A_All_Data<T, Args...>;
+		public:
+			~A_Final() override = default;
+
+
+			using Inh1::base_func;
+
+			using Inh2::shared_func;
+
+			using Inh3::data_func;
+			using Inh3::member_func;
+		};
+
+		// Implementing this part is easy.
+		class Base :
+			public virtual A_Base
+		{
+		public:
+			~Base() override = default;
+
+			void base_func() override {}
+		};
+
+		// As is this, but figuring out how to get to it isn't.
+		template <typename T, typename...Args>
+		class Shared :
+			public virtual A_Shared<T, Args...>
+		{
+		public:
+			Shared() = default;
+			~Shared() override = default;
+
+			// final public part
+			void shared_func(A_Shared_Thing<T, Args...>* a_ptr) override { m_data.push_back(a_ptr); }
+
+			// final private / hidden part
+			std::vector<A_Shared_Thing<T, Args...>*>& use_shared() { return m_data; } // Things will need this...
+		private:
+			std::vector<A_Shared_Thing<T, Args...>*> m_data;
+		};
+
+		// Chaining data together
+		/*
+		template <typename T_Shared, typename...Args>
+		class Data;
+
+
+		template <typename T_Shared, typename...Args>
+		class Data;
+
+
+
+
+
+		// The top class of data chains members together
+		template <typename T_Shared, typename T>
+		class Data<T_Shared,T> :
+			private Member<0, std::tuple_size_v<T>-1, T> 
+		{
+			using Inh = Member<0, std::tuple_size_v<T>-1, T>;
+		public:
+			~Data() override = default;
+
+			using Inh::member_func;
+			using Inh::data_func;
+			using Inh::data_func;
+			using Inh::shared_func;
+		};
+
+
+		template <std::size_t I, std::size_t Last, typename T_Shared, typename...Args>
+		class Member;
+		
+		template <std::size_t I, std::size_t Last, typename T_Shared, typename T, typename...Args>
+		class Member :
+			public virtual A_Member<I,T>,
+			public Member<I+1,Last, T_Shared,T,Args...>
+		{
+			using Inh = Member<I + 1, Last, T_Shared, T, Args...>;
+		public:
+			~Member() override = default;
+
+			void member_func(Index_Tag<I>&&, T const& arg) override { this->use_member<I>(arg); }
+
+			using Inh::member_func;
+			using Inh::data_func;
+			using Inh::shared_func;
+		};
+
+		template <std::size_t Last, typename T_Shared, typename T, typename R, typename...Args>
+		class Member<Last, Last, T_Shared, T> :
+			public virtual A_Member<Last, T>,
+			public Data_Bottom<T_Shared, T>
+		{
+			using Inh = Data_Imp<T>;
+		public:
+			~Member() override = default;
+
+			void member_func(Index_Tag<I>&&, T const&) override { this->use_member<I>(arg); }
+
+			using Inh::data_func;
+			using Inh::shared_func;
+		};
+
+		template <std::size_t Last, typename T_Shared, typename T>
+		class Member<Last,Last, T_Shared,T> :
+			public virtual A_Member<Last, T>,
+			public Data_Bottom<T_Shared,T>
+		{
+			using Inh = Data_Imp<T>;
+		public:
+			~Member() override = default;
+
+			void member_func(Index_Tag<I>&&, T const&) override { this->use_member<I>(arg); }
+
+			using Inh::data_func;
+			using Inh::shared_func;
+		};
+
+
+		template <typename T_Shared, typename...Args>
+		class Data_Bottom;
+
+
+		template <typename T_Shared, typename T, typename R, typename...Args>
+		class Data_Bottom<T_Shared, T, R, Args...> :
+			public virtual A_Data<T>,
+			public Data<T_Shared,R,Args...>
+		{
+		public:
+			Data_Bottom() = default;
+			~Data_Bottom() override = default;
+			
+			// final public part
+			using Data<T_Shared, R, Args...>::shared_func;
+			using Data<T_Shared, R, Args...>::data_func;
+			using Data<T_Shared, R, Args...>::member_func;
+
+			void data_func(Tag<T>&&) override { m_data.imp_data_func(this); }
+
+			// Forwarding layer for members
+		protected:
+			template <std::size_t I>
+			void use_member_func(T const& arg) { m_data.imp_member_func(this, arg); }
+		private:
+			Data_Imp<T_Shared, T> m_data;
+		};
+		
+		template <typename T_Shared, typename T>
+		class Data_Bottom :
+			public virtual A_Data<T>,
+			public T_Shared
+		{
+		public:
+			Data_Bottom() = default;
+			~Data_Bottom() override = default;
+
+			// final public part
+			using T_Shared::shared_func;
+
+			void data_func(Tag<T>&&) override { m_data.imp_data_func(this); }
+
+			// Forwarding layer for members
+		protected:
+			template <std::size_t I>
+			void use_member_func(T const& arg) { m_data.imp_member_func(this, arg); }
+		private:
+			Data_Imp<T_Shared, T> m_data;
+		};
+		*/
+
+		// This implements the data and access to it in terms of supplied objects
+		template <typename T_Shared, typename T>
+		class Data_Imp
+		{
+			static_assert(std::tuple_size_v<T> != 0, "bad tuple");
+		public:
+			Data_Imp() = default;
+			
+			void imp_data_func(T_Shared* a_shared) { a_shared->use_shared(); }
+
+			template <std::size_t I>
+			void imp_member_func(T_Shared* a_shared, T const&) { a_shared->use_shared(); auto& a = m_data; }
+		private:
+			std::vector<T> m_data;
+		};
+
+		// Chain together data that ends in inheriting T_Shared
+		template <typename T_Shared, std::size_t I, std::size_t L, typename...Args>
+		class Data;
+
+		// The end is the last data section and inherits shared
+		template <typename T_Shared, std::size_t L, typename T>
+		class Data<T_Shared, L, L, T> :
+			public virtual A_Member<L,T>,
+			public virtual A_Data_Part<T>, // interface for this section
+			public virtual T_Shared
+		{
+		public:
+			~Data() override = default;
+
+			using T_Shared::shared_func;
+
+			void member_func(Index_Tag<L>&&, T const& arg) override { use_member_func<L>(arg);  } // the last member function
+			void data_func(Tag<T>&&) override { m_data.imp_data_func(this); }
+
+			// Access for member implementers
+		protected:
+			template <std::size_t I>
+			void use_member_func(T const& arg) { m_data.imp_member_func<I>(this, arg); }
+
+		private:
+			Data_Imp<T_Shared, T> m_data;
+		};
+
+		// the end of a mid-chain data section
+		template <typename T_Shared, std::size_t L, typename T, typename R, typename...Args>
+		class Data<T_Shared, L, L, T,R,Args...> :
+			public Data<T_Shared,L,L,T>, // inherit the end stuff here. virtual inheritance means there should only be one T_Shared...
+			public Data<T_Shared, 0, std::tuple_size_v<R> - 1 , R,Args...>
+		{
+		public:
+			~Data() override = default;
+
+			using T_Shared::shared_func;
+
+			using Data<T_Shared, L, L, T>::member_func;
+			using Data<T_Shared, L, L, T>::data_func;
+			
+			using Data<T_Shared, 0, std::tuple_size_v<R> -1, R, Args...>::member_func;
+			using Data<T_Shared, 0, std::tuple_size_v<R> -1, R, Args...>::data_func;
+
+		protected:
+			using Data<T_Shared, L, L, T>::use_member_func;
+		};
+
+
+		// when inside any data
+		template <typename T_Shared, std::size_t I, std::size_t L, typename T, typename...Args>
+		class Data<T_Shared, I, L, T, Args...> :
+			public virtual A_Member<I, T>,
+			public Data<T_Shared, I+1, L, T, Args...>
+		{
+		public:
+			~Data() override = default;
+
+			using T_Shared::shared_func;
+
+			using Data<T_Shared, I + 1, L, T, Args...>::member_func;
+			using Data<T_Shared, I + 1, L, T, Args...>::data_func;
+			
+			void member_func(Index_Tag<I>&&, T const& arg) override { use_member_func<I>(arg); } // the last member function
+
+		protected:
+			using Data<T_Shared, I + 1, L, T, Args...>::use_member_func;
+		};
+
+
+
+
+
+
+
+
+
+
+
+
+		template <typename T, typename...Args>
+		class Final :
+			public A_Final<T, Args...>,
+			private Data<Shared<T, Args...>, 0, std::tuple_size_v<T>-1, T, Args...>,
+			private Base
+		{
+			using Inh = Data<Shared<T, Args...>, 0, std::tuple_size_v<T>-1, T, Args...>;
+		public:
+			~Final() override = default;
+
+			using Base::base_func;
+
+			using Inh::shared_func;
+			using Inh::data_func;
+			using Inh::member_func;
+		};
+
+	}
 
 	void test();
 }

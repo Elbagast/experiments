@@ -88,6 +88,7 @@ namespace fixed_int_test
 #include "object_address.h"
 #include "lambda_class.h"
 #include "templating_interface.hpp"
+#include "inheritance_sizes.hpp"
 
 #include <string>
 
@@ -262,6 +263,8 @@ int main(int argc, char* argv[])
 	lambda_class::test();
 
 	templating_interface::test();
+
+	inheritance_sizes::test();
 
 	/*
 	auto l_int = auto_test<int>();

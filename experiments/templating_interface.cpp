@@ -11,9 +11,6 @@ void templating_interface::test()
 	using Abstract_Test_Type = Abstract_Big_Thing<Foo, Bar>;
 	using Test_Type = Big_Thing<Foo, Bar>;
 
-	try
-	{
-
 	//Abstract_Test_Type l_test1{};
 	Test_Type l_test2{};
 	//Abstract_Test_Type& l_test3 = l_test2;
@@ -34,11 +31,29 @@ void templating_interface::test()
 	Thing_User l_test99{};
 	l_test99.f();
 
-	}
-	catch (std::exception& a_exception)
-	{
-		std::cout << a_exception.what() << std::endl;
-	}
+	using namespace again;
+
+	Final<Foo,Bar> a_final{};
+	A_Final<Foo, Bar>& a_afinal{ a_final };
+
+
+
+	a_final.base_func();
+	a_final.shared_func(nullptr);
+	a_final.data_func(Tag<Foo>());
+	a_final.data_func(Tag<Bar>());
+	a_final.member_func(again::Index_Tag<0>(), l_foo);
+	a_final.member_func(again::Index_Tag<1>(), l_foo);
+	a_final.member_func(again::Index_Tag<2>(), l_foo);
+	//a_final.member_func(again::Index_Tag<3>(), l_foo);
+	a_final.member_func(again::Index_Tag<0>(), l_bar);
+	a_final.member_func(again::Index_Tag<1>(), l_bar);
+	a_final.member_func(again::Index_Tag<2>(), l_bar);
+	a_final.member_func(again::Index_Tag<3>(), l_bar);
+	//a_final.member_func(again::Index_Tag<4>(), l_bar);
+
+	// DUN DUN DUN
+
 
 	std::cout << "----------------------------------------" << std::endl;
 }

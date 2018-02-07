@@ -123,13 +123,16 @@
     <ClCompile Include="enable_if.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="object_address.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="lambda_class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="templating_interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="object_address.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inheritance_sizes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -267,6 +270,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="templating_interface.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inheritance_sizes.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

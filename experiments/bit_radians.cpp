@@ -11,6 +11,7 @@
 #include <vector>
 
 
+/*
 namespace
 {
     template <std::size_t N>
@@ -137,12 +138,12 @@ namespace
 
         return l_uneqivalent_count;
     }
-}
+}*/
 
 void bit_radians::test()
 {
     std::cout << "Bit Radians" << std::endl << std::endl;
-
+	/*
     static float const pi_single{ 3.1415927f };
     static float const halfpi_single{ pi_single/2 };
 
@@ -160,6 +161,6 @@ void bit_radians::test()
     std::uint64_t l_float_result = all_bitwise_sin_test<float>(5);
     std::cout << l_float_result << " non-equivalent values" << std::endl;
     //std::cout << "double has " << all_sin_test <float>() << " non-equivalent values" << std::endl;
-
+	*/
     std::cout << "----------------------------------------" << std::endl;
 }
