@@ -1,6 +1,9 @@
 #include "inheritance_sizes.hpp"
 
 #include <iostream>
+#include <chrono>
+#include <memory>
+#include <string>
 
 // inheritance without virtual functions
 class Base
@@ -9,7 +12,9 @@ public:
 	Base() = default;
 	~Base() = default;
 
-	void func() {}
+	std::string func() { return m_data; }
+
+	std::string m_data;
 };
 
 class Derived :
@@ -27,14 +32,15 @@ public:
 class Base1
 {
 public:
-	void a() {}
+	std::string a() { return m_data; }
+	std::string m_data;
 };
 class Base2 :
 	protected Base1
 {
 public:
 	using Base1::a;
-	void b() {}
+	std::string b() { return m_data; }
 };
 class Base3 :
 	protected Base2
@@ -42,7 +48,7 @@ class Base3 :
 public:
 	using Base2::a;
 	using Base2::b;
-	void c() {}
+	std::string c() { return m_data; }
 };
 class Base4 :
 	protected Base3
@@ -51,7 +57,7 @@ public:
 	using Base3::a;
 	using Base3::b;
 	using Base3::c;
-	void d() {}
+	std::string d() { return m_data; }
 };
 
 
@@ -104,7 +110,7 @@ public:
 	VBase() = default;
 	virtual ~VBase() = default;
 
-	virtual void func() = 0;
+	virtual std::string func() = 0;
 };
 
 class VDerived :
@@ -114,9 +120,22 @@ public:
 	VDerived() : VBase() {}
 	~VDerived() = default;
 
-	void func() override {}
+	std::string func() override { return m_data; }
+private:
+	std::string m_data;
 };
 
+class VDerived2 :
+	public VDerived
+{
+public:
+	VDerived2() : VDerived() {}
+	~VDerived2() = default;
+
+	std::string func() override { return m_data; }
+private:
+	std::string m_data;
+};
 
 
 // chained inheritance with virtual functions
@@ -125,7 +144,7 @@ class VBase1
 public:
 	virtual ~VBase1() = default;
 
-	virtual void a() = 0;
+	virtual std::string a() = 0;
 };
 class VBase2 :
 	protected VBase1
@@ -133,7 +152,7 @@ class VBase2 :
 public:
 	~VBase2() override = default;
 
-	virtual void b() = 0;
+	virtual std::string b() = 0;
 };
 class VBase3 :
 	protected VBase2
@@ -141,7 +160,7 @@ class VBase3 :
 public:
 	~VBase3() override = default;
 
-	virtual void c() = 0;
+	virtual std::string c() = 0;
 };
 class VBase4 :
 	protected VBase3
@@ -149,7 +168,7 @@ class VBase4 :
 public:
 	~VBase4() override = default;
 
-	virtual void d() = 0;
+	virtual std::string d() = 0;
 };
 class VDerived4 :
 	public VBase4
@@ -157,10 +176,12 @@ class VDerived4 :
 public:
 	~VDerived4() override = default;
 
-	void a() override {}
-	void b() override {}
-	void c() override {}
-	void d() override {}
+	std::string a() override { return m_data; }
+	std::string b() override { return m_data; }
+	std::string c() override { return m_data; }
+	std::string d() override { return m_data; }
+
+	std::string m_data;
 };
 
 
@@ -177,8 +198,8 @@ public:
 	void b() {}
 };
 class MDerived  :
-	protected MBase1,
-	protected MBase2
+	public MBase1,
+	public MBase2
 {
 public:
 	using MBase1::a;
@@ -191,23 +212,25 @@ class VMBase1
 {
 public:
 	virtual ~VMBase1() = default;
-	virtual void a() = 0;
+	virtual std::string a() = 0;
 };
 class VMBase2
 {
 public:
 	virtual ~VMBase2() = default;
-	virtual void b() = 0;
+	virtual std::string b() = 0;
 };
 class VMDerived :
-	protected VMBase1,
-	protected VMBase2
+	public VMBase1,
+	public VMBase2
 {
 public:
 	~VMDerived() override = default;
 
-	void a() override {}
-	void b() override {}
+	std::string a() override { return m_data; }
+	std::string b() override { return m_data; }
+private:
+	std::string m_data;
 };
 
 
@@ -215,19 +238,25 @@ public:
 class MBaseV
 {
 public:
-	void a() {}
+	std::string a() { return m_data; }
+private:
+	std::string m_data;
 };
 class MBaseV1 :
 	public virtual MBaseV
 {
 public:
-	void b() {}
+	std::string b() { return m_data; }
+private:
+	std::string m_data;
 };
 class MBaseV2 :
 	public virtual MBaseV
 {
 public:
-	void c() {}
+	std::string c() { return m_data; }
+private:
+	std::string m_data;
 };
 class MDerivedV :
 	protected MBaseV1,
@@ -245,32 +274,34 @@ class VMBaseV
 {
 public:
 	virtual ~VMBaseV() = default;
-	virtual void a() = 0;
+	virtual std::string a() = 0;
 };
 class VMBaseV1 :
 	public virtual VMBaseV
 {
 public:
 	~VMBaseV1() override = default;
-	virtual void b() = 0;
+	virtual std::string b() = 0;
 };
 class VMBaseV2 :
 	public virtual VMBaseV
 {
 public:
 	~VMBaseV2() override = default;
-	virtual void c() = 0;
+	virtual std::string c() = 0;
 };
 class VMDerivedV :
-	protected VMBaseV1,
-	protected VMBaseV2
+	public VMBaseV1,
+	public VMBaseV2
 {
 public:
 	~VMDerivedV() override = default;
 
-	void a() override {}
-	void b() override {}
-	void c() override {}
+	std::string a() override { return m_data; }
+	std::string b() override { return m_data; }
+	std::string c() override { return m_data; }
+private:
+	std::string m_data;
 };
 
 class VMBaseV3 :
@@ -278,7 +309,7 @@ class VMBaseV3 :
 {
 public:
 	~VMBaseV3() override = default;
-	virtual void d() = 0;
+	virtual std::string d() = 0;
 };
 class VMDerivedV2 :
 	protected VMBaseV1,
@@ -288,10 +319,12 @@ class VMDerivedV2 :
 public:
 	~VMDerivedV2() override = default;
 
-	void a() override {}
-	void b() override {}
-	void c() override {}
-	void d() override {}
+	std::string a() override { return m_data; }
+	std::string b() override { return m_data; }
+	std::string c() override { return m_data; }
+	std::string d() override { return m_data; }
+private:
+	std::string m_data;
 };
 
 
@@ -308,12 +341,26 @@ void inheritance_sizes::test()
 	std::cout << "sizeof(void*) = " << sizeof(void*) << std::endl;
 	std::cout << "sizeof(A) = " << sizeof(A) << std::endl;
 
+	int count = 100000;
 
-	std::cout << std::endl << "inheritance" << std::endl;
+	std::cout << std::endl << "(private) inheritance" << std::endl;
 	std::cout << "sizeof(Base) = " << sizeof(Base) << std::endl;
 	std::cout << "sizeof(Derived) = " << sizeof(Derived) << std::endl;
+	{
+		auto l_d = std::make_unique<Derived>();
 
+		Derived* l_ptr = l_d.get();
+		std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+		for (int i = 0; i != count; ++i)
+		{
+			l_ptr->func();
+		}
+		std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+		auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
 
+		std::cout << std::endl << "Time for " << count << " Base::func calls " << l_duration << "ms" << std::endl;
+	}
+	
 	std::cout << std::endl << "chained inheritance" << std::endl;
 	std::cout << "sizeof(Base1) = " << sizeof(Base1) << std::endl;
 	std::cout << "sizeof(Base2) = " << sizeof(Base2) << std::endl;
@@ -338,7 +385,85 @@ void inheritance_sizes::test()
 	std::cout << std::endl << "inheritance with virtual functions" << std::endl;
 	std::cout << "sizeof(VBase) = " << sizeof(VBase) << std::endl;
 	std::cout << "sizeof(VDerived) = " << sizeof(VDerived) << std::endl;
+	{
+		auto l_d = std::make_unique<VDerived>();
+		{
+			VBase* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->func();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
 
+			std::cout << std::endl << "Time for " << count << " VBase::func calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VDerived* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->func();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << std::endl << "Time for " << count << " VDerived::func calls " << l_duration << "ms" << std::endl;
+		}
+	}
+
+	{
+		auto l_d = std::make_unique<VDerived2>();
+		{
+			VBase* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->func();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << std::endl << "Time for " << count << " VBase::func virtual ccalls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VDerived* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->func();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << std::endl << "Time for " << count << " VDerived::func virtual ccalls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VDerived2* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->func();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << std::endl << "Time for " << count << " VDerived2::func virtual calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VDerived2* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->VDerived2::func();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << std::endl << "Time for " << count << " VDerived2::func direct calls " << l_duration << "ms" << std::endl;
+		}
+	}
 
 	std::cout << std::endl << "chained inheritance with virtual functions" << std::endl;
 	std::cout << "sizeof(VBase1) = " << sizeof(VBase1) << std::endl;
@@ -353,11 +478,93 @@ void inheritance_sizes::test()
 	std::cout << "sizeof(MBase2) = " << sizeof(MBase2) << std::endl;
 	std::cout << "sizeof(MDerived) = " << sizeof(MDerived) << std::endl;
 
+	{
+		auto l_d = std::make_unique<MDerived>();
+		{
+			MDerived* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->a();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " MDerived::a calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			MDerived* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->b();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " MDerived::b calls " << l_duration << "ms" << std::endl;
+		}
+	}
+	
+
 	std::cout << std::endl << "multiple inheritance with virtual functions" << std::endl;
 	std::cout << "sizeof(VMBase1) = " << sizeof(VMBase1) << std::endl;
 	std::cout << "sizeof(VMBase2) = " << sizeof(VMBase2) << std::endl;
 	std::cout << "sizeof(VMDerived) = " << sizeof(VMDerived) << std::endl;
 	// results in parallel vtables
+
+	{
+		auto l_d = std::make_unique<VMDerived>();
+		{
+			VMBase1* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->a();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMBase1::a calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMBase2* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->b();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMBase2::b calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMDerived* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->VMDerived::a();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMDerived::a calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMDerived* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->VMDerived::b();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMDerived::b calls " << l_duration << "ms" << std::endl;
+		}
+	}
+	
 
 	std::cout << std::endl << "multiple virtual inheritance" << std::endl;
 	std::cout << "sizeof(MBaseV) = " << sizeof(MBaseV) << std::endl;
@@ -370,7 +577,81 @@ void inheritance_sizes::test()
 	std::cout << "sizeof(VMBaseV1) = " << sizeof(VMBaseV1) << std::endl;
 	std::cout << "sizeof(VMBaseV2) = " << sizeof(VMBaseV2) << std::endl;
 	std::cout << "sizeof(VMDerivedV) = " << sizeof(VMDerivedV) << std::endl;
+	{
+		auto l_d = std::make_unique<VMDerivedV>();
+		{
+			VMBaseV* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->a();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
 
+			std::cout << "Time for " << count << " VMBaseV::a virtual calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMBaseV1* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->b();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMBaseV1::b virtual calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMBaseV2* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->a();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMBaseV2::a virtual calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMDerivedV* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->VMDerivedV::a();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMDerivedV::a calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMDerivedV* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->VMDerivedV::b();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMDerivedV::b calls " << l_duration << "ms" << std::endl;
+		}
+		{
+			VMDerivedV* l_ptr = l_d.get();
+			std::chrono::high_resolution_clock::time_point l_dt1 = std::chrono::high_resolution_clock::now();
+			for (int i = 0; i != count; ++i)
+			{
+				l_ptr->VMDerivedV::c();
+			}
+			std::chrono::high_resolution_clock::time_point l_dt2 = std::chrono::high_resolution_clock::now();
+			auto l_duration = std::chrono::duration_cast<std::chrono::microseconds>(l_dt2 - l_dt1).count();
+
+			std::cout << "Time for " << count << " VMDerivedV::c calls " << l_duration << "ms" << std::endl;
+		}
+	}
 	std::cout << "with 3 base classes" << std::endl;
 	std::cout << "sizeof(VMBaseV3) = " << sizeof(VMBaseV3) << std::endl;
 	std::cout << "sizeof(VMDerivedV2) = " << sizeof(VMDerivedV2) << std::endl;

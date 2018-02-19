@@ -749,15 +749,6 @@ namespace templating_interface
 
 
 
-
-
-
-
-
-
-
-
-
 		template <typename T, typename...Args>
 		class Final :
 			public A_Final<T, Args...>,
